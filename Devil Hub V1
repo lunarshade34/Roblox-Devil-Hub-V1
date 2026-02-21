@@ -14,6 +14,7 @@ local AimbotButton = Instance.new("TextButton")
 local AC6Button = Instance.new("TextButton")
 local DDoSButton = Instance.new("TextButton")
 local StatusLabel = Instance.new("TextLabel")
+local DiscordLabel = Instance.new("TextLabel")
 
 local player = game.Players.LocalPlayer
 local camera = game.Workspace.CurrentCamera
@@ -28,11 +29,11 @@ ScreenGui.Parent = game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.ResetOnSpawn = false
 
-local guiWidth = isMobile and 350 or 450
-local guiHeight = isMobile and 600 or 700
-local buttonHeight = isMobile and 65 or 55
-local fontSize = isMobile and 18 or 20
-local titleSize = isMobile and 22 or 24
+local guiWidth = isMobile and 300 or 450
+local guiHeight = isMobile and 520 or 700
+local buttonHeight = isMobile and 55 or 55
+local fontSize = isMobile and 16 or 20
+local titleSize = isMobile and 20 or 24
 
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = ScreenGui
@@ -64,7 +65,7 @@ Title.Name = "Title"
 Title.Parent = MainFrame
 Title.BackgroundColor3 = Color3.fromRGB(45, 0, 75)
 Title.BorderSizePixel = 0
-Title.Size = UDim2.new(1, 0, 0, isMobile and 45 or 50)
+Title.Size = UDim2.new(1, 0, 0, isMobile and 40 or 50)
 Title.Font = Enum.Font.GothamBold
 Title.Text = "DEVIL HUB V1"
 Title.TextColor3 = Color3.fromRGB(200, 150, 255)
@@ -87,12 +88,12 @@ CloseButton.Name = "CloseButton"
 CloseButton.Parent = MainFrame
 CloseButton.BackgroundColor3 = Color3.fromRGB(140, 0, 70)
 CloseButton.BorderSizePixel = 0
-CloseButton.Position = UDim2.new(1, -(isMobile and 40 or 45), 0, isMobile and 8 or 10)
-CloseButton.Size = UDim2.new(0, isMobile and 32 or 35, 0, isMobile and 32 or 35)
+CloseButton.Position = UDim2.new(1, -(isMobile and 35 or 45), 0, isMobile and 5 or 10)
+CloseButton.Size = UDim2.new(0, isMobile and 28 or 35, 0, isMobile and 28 or 35)
 CloseButton.Font = Enum.Font.GothamBold
 CloseButton.Text = "X"
 CloseButton.TextColor3 = Color3.fromRGB(255, 200, 255)
-CloseButton.TextSize = isMobile and 18 or 20
+CloseButton.TextSize = isMobile and 16 or 20
 CloseButton.AutoButtonColor = false
 
 local CloseCorner = Instance.new("UICorner")
@@ -123,8 +124,8 @@ ScrollFrame.Name = "ScrollFrame"
 ScrollFrame.Parent = MainFrame
 ScrollFrame.BackgroundColor3 = Color3.fromRGB(25, 0, 35)
 ScrollFrame.BorderSizePixel = 0
-ScrollFrame.Position = UDim2.new(0, 10, 0, isMobile and 55 or 65)
-ScrollFrame.Size = UDim2.new(1, -20, 1, -(isMobile and 140 or 170))
+ScrollFrame.Position = UDim2.new(0, 8, 0, isMobile and 45 or 65)
+ScrollFrame.Size = UDim2.new(1, -16, 1, -(isMobile and 115 or 170))
 ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 ScrollFrame.ScrollBarThickness = isMobile and 4 or 8
 ScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(140, 0, 255)
@@ -137,14 +138,14 @@ ScrollCorner.Parent = ScrollFrame
 
 UIListLayout.Parent = ScrollFrame
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0, isMobile and 8 or 12)
+UIListLayout.Padding = UDim.new(0, isMobile and 6 or 12)
 UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
 local AimbotRadiusFrame = Instance.new("Frame")
 AimbotRadiusFrame.Parent = ScrollFrame
 AimbotRadiusFrame.BackgroundColor3 = Color3.fromRGB(30, 0, 40)
 AimbotRadiusFrame.BorderSizePixel = 0
-AimbotRadiusFrame.Size = UDim2.new(1, -20, 0, isMobile and 70 or 60)
+AimbotRadiusFrame.Size = UDim2.new(1, -16, 0, isMobile and 60 or 60)
 AimbotRadiusFrame.BackgroundTransparency = 0.2
 
 local RadiusCorner = Instance.new("UICorner")
@@ -154,30 +155,30 @@ RadiusCorner.Parent = AimbotRadiusFrame
 local RadiusLabel = Instance.new("TextLabel")
 RadiusLabel.Parent = AimbotRadiusFrame
 RadiusLabel.BackgroundTransparency = 1
-RadiusLabel.Size = UDim2.new(1, -20, 0, 25)
-RadiusLabel.Position = UDim2.new(0, 10, 0, 5)
+RadiusLabel.Size = UDim2.new(1, -20, 0, 20)
+RadiusLabel.Position = UDim2.new(0, 8, 0, 4)
 RadiusLabel.Font = Enum.Font.Gotham
 RadiusLabel.Text = "Aimbot Circle Size"
 RadiusLabel.TextColor3 = Color3.fromRGB(200, 150, 255)
-RadiusLabel.TextSize = isMobile and 13 or 14
+RadiusLabel.TextSize = isMobile and 12 or 14
 RadiusLabel.TextXAlignment = Enum.TextXAlignment.Left
 
 local RadiusValue = Instance.new("TextLabel")
 RadiusValue.Parent = AimbotRadiusFrame
 RadiusValue.BackgroundTransparency = 1
-RadiusValue.Size = UDim2.new(0, 50, 0, 25)
-RadiusValue.Position = UDim2.new(1, -60, 0, 5)
+RadiusValue.Size = UDim2.new(0, 40, 0, 20)
+RadiusValue.Position = UDim2.new(1, -48, 0, 4)
 RadiusValue.Font = Enum.Font.GothamBold
 RadiusValue.Text = "150"
 RadiusValue.TextColor3 = Color3.fromRGB(255, 255, 255)
-RadiusValue.TextSize = isMobile and 13 or 14
+RadiusValue.TextSize = isMobile and 12 or 14
 
 local RadiusSlider = Instance.new("Frame")
 RadiusSlider.Parent = AimbotRadiusFrame
 RadiusSlider.BackgroundColor3 = Color3.fromRGB(60, 60, 70)
 RadiusSlider.BorderSizePixel = 0
-RadiusSlider.Position = UDim2.new(0, 10, 0, 35)
-RadiusSlider.Size = UDim2.new(1, -20, 0, isMobile and 25 or 15)
+RadiusSlider.Position = UDim2.new(0, 8, 0, 28)
+RadiusSlider.Size = UDim2.new(1, -16, 0, isMobile and 20 or 15)
 
 local SliderCorner = Instance.new("UICorner")
 SliderCorner.CornerRadius = UDim.new(1, 0)
@@ -189,12 +190,68 @@ SliderButton.Parent = RadiusSlider
 SliderButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 SliderButton.BorderSizePixel = 0
 SliderButton.Position = UDim2.new(0, 0, 0, 0)
-SliderButton.Size = UDim2.new(0, isMobile and 30 or 20, 1, 0)
+SliderButton.Size = UDim2.new(0, isMobile and 24 or 20, 1, 0)
 SliderButton.Text = ""
 
 local SliderButtonCorner = Instance.new("UICorner")
 SliderButtonCorner.CornerRadius = UDim.new(1, 0)
 SliderButtonCorner.Parent = SliderButton
+
+local DDoSTimeFrame = Instance.new("Frame")
+DDoSTimeFrame.Parent = ScrollFrame
+DDoSTimeFrame.BackgroundColor3 = Color3.fromRGB(30, 0, 40)
+DDoSTimeFrame.BorderSizePixel = 0
+DDoSTimeFrame.Size = UDim2.new(1, -16, 0, isMobile and 60 or 60)
+DDoSTimeFrame.BackgroundTransparency = 0.2
+
+local TimeCorner = Instance.new("UICorner")
+TimeCorner.CornerRadius = UDim.new(0, 8)
+TimeCorner.Parent = DDoSTimeFrame
+
+local TimeLabel = Instance.new("TextLabel")
+TimeLabel.Parent = DDoSTimeFrame
+TimeLabel.BackgroundTransparency = 1
+TimeLabel.Size = UDim2.new(1, -20, 0, 20)
+TimeLabel.Position = UDim2.new(0, 8, 0, 4)
+TimeLabel.Font = Enum.Font.Gotham
+TimeLabel.Text = "DDoS Duration (seconds)"
+TimeLabel.TextColor3 = Color3.fromRGB(200, 150, 255)
+TimeLabel.TextSize = isMobile and 12 or 14
+TimeLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local TimeValue = Instance.new("TextLabel")
+TimeValue.Parent = DDoSTimeFrame
+TimeValue.BackgroundTransparency = 1
+TimeValue.Size = UDim2.new(0, 40, 0, 20)
+TimeValue.Position = UDim2.new(1, -48, 0, 4)
+TimeValue.Font = Enum.Font.GothamBold
+TimeValue.Text = "30"
+TimeValue.TextColor3 = Color3.fromRGB(255, 255, 255)
+TimeValue.TextSize = isMobile and 12 or 14
+
+local TimeSlider = Instance.new("Frame")
+TimeSlider.Parent = DDoSTimeFrame
+TimeSlider.BackgroundColor3 = Color3.fromRGB(60, 60, 70)
+TimeSlider.BorderSizePixel = 0
+TimeSlider.Position = UDim2.new(0, 8, 0, 28)
+TimeSlider.Size = UDim2.new(1, -16, 0, isMobile and 20 or 15)
+
+local TimeSliderCorner = Instance.new("UICorner")
+TimeSliderCorner.CornerRadius = UDim.new(1, 0)
+TimeSliderCorner.Parent = TimeSlider
+
+local TimeSliderButton = Instance.new("TextButton")
+TimeSliderButton.Name = "TimeSliderButton"
+TimeSliderButton.Parent = TimeSlider
+TimeSliderButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TimeSliderButton.BorderSizePixel = 0
+TimeSliderButton.Position = UDim2.new(0, 0, 0, 0)
+TimeSliderButton.Size = UDim2.new(0, isMobile and 24 or 20, 1, 0)
+TimeSliderButton.Text = ""
+
+local TimeSliderButtonCorner = Instance.new("UICorner")
+TimeSliderButtonCorner.CornerRadius = UDim.new(1, 0)
+TimeSliderButtonCorner.Parent = TimeSliderButton
 
 local function createButton(name)
     local button = Instance.new("TextButton")
@@ -202,7 +259,7 @@ local function createButton(name)
     button.Parent = ScrollFrame
     button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     button.BorderSizePixel = 0
-    button.Size = UDim2.new(1, -20, 0, buttonHeight)
+    button.Size = UDim2.new(1, -16, 0, buttonHeight)
     button.Font = Enum.Font.GothamBold
     button.Text = name
     button.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -210,16 +267,16 @@ local function createButton(name)
     button.AutoButtonColor = false
     
     local btnCorner = Instance.new("UICorner")
-    btnCorner.CornerRadius = UDim.new(0, 10)
+    btnCorner.CornerRadius = UDim.new(0, 8)
     btnCorner.Parent = button
     
     if not isMobile then
         button.MouseEnter:Connect(function()
-            button:TweenSize(UDim2.new(1, -15, 0, buttonHeight + 5), "Out", "Quad", 0.2)
+            button:TweenSize(UDim2.new(1, -12, 0, buttonHeight + 5), "Out", "Quad", 0.2)
         end)
         
         button.MouseLeave:Connect(function()
-            button:TweenSize(UDim2.new(1, -20, 0, buttonHeight), "Out", "Quad", 0.2)
+            button:TweenSize(UDim2.new(1, -16, 0, buttonHeight), "Out", "Quad", 0.2)
         end)
     end
     
@@ -238,16 +295,16 @@ DDoSButton = createButton("DDoS ATTACK")
 StatusLabel.Parent = MainFrame
 StatusLabel.BackgroundColor3 = Color3.fromRGB(30, 0, 45)
 StatusLabel.BorderSizePixel = 0
-StatusLabel.Position = UDim2.new(0, 10, 1, -(isMobile and 65 or 70))
-StatusLabel.Size = UDim2.new(1, -20, 0, isMobile and 50 or 55)
+StatusLabel.Position = UDim2.new(0, 8, 1, -(isMobile and 50 or 70))
+StatusLabel.Size = UDim2.new(1, -16, 0, isMobile and 35 or 55)
 StatusLabel.Font = Enum.Font.Gotham
 StatusLabel.Text = "Status: Devil Ready"
 StatusLabel.TextColor3 = Color3.fromRGB(200, 150, 255)
-StatusLabel.TextSize = isMobile and 14 or 16
+StatusLabel.TextSize = isMobile and 12 or 16
 StatusLabel.BackgroundTransparency = 0.3
 
 local StatusCorner = Instance.new("UICorner")
-StatusCorner.CornerRadius = UDim.new(0, 10)
+StatusCorner.CornerRadius = UDim.new(0, 8)
 StatusCorner.Parent = StatusLabel
 
 local StatusGradient = Instance.new("UIGradient")
@@ -257,6 +314,17 @@ StatusGradient.Color = ColorSequence.new({
 })
 StatusGradient.Rotation = 90
 StatusGradient.Parent = StatusLabel
+
+DiscordLabel.Parent = MainFrame
+DiscordLabel.BackgroundColor3 = Color3.fromRGB(20, 0, 30)
+DiscordLabel.BorderSizePixel = 0
+DiscordLabel.Position = UDim2.new(0, 8, 1, -(isMobile and 15 or 20))
+DiscordLabel.Size = UDim2.new(1, -16, 0, isMobile and 15 or 20)
+DiscordLabel.Font = Enum.Font.Gotham
+DiscordLabel.Text = "discord : sibertank."
+DiscordLabel.TextColor3 = Color3.fromRGB(150, 100, 200)
+DiscordLabel.TextSize = isMobile and 10 or 12
+DiscordLabel.BackgroundTransparency = 1
 
 ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y + 70)
 
@@ -276,11 +344,13 @@ local currentSpeed = 120
 local currentJump = 250
 local aimbotRadius = 150
 local aimbotSmoothness = 0.3
+local ddosDuration = 30
 
 local espHighlights = {}
 local aimbotCircle = nil
 local aimbotConnection = nil
 local ddosThreads = {}
+local ddosEndTime = 0
 
 local function updateStatus(text, isError)
     StatusLabel.Text = "Status: " .. text
@@ -308,18 +378,44 @@ local function updateAimbotRadius(newRadius)
     end
 end
 
-local function handleSliderInput(input)
-    local pos = math.clamp((input.Position.X - RadiusSlider.AbsolutePosition.X) / RadiusSlider.AbsoluteSize.X, 0, 1)
+local function updateDDoSTime(newTime)
+    ddosDuration = math.floor(newTime)
+    TimeValue.Text = tostring(ddosDuration)
+end
+
+local function handleSliderInput(input, slider, callback, min, max)
+    local pos = math.clamp((input.Position.X - slider.AbsolutePosition.X) / slider.AbsoluteSize.X, 0, 1)
     SliderButton.Position = UDim2.new(pos, 0, 0, 0)
-    local newRadius = 50 + (pos * 450)
-    updateAimbotRadius(newRadius)
+    local newValue = min + (pos * (max - min))
+    callback(newValue)
 end
 
 SliderButton.MouseButton1Down:Connect(function()
     local connection
     connection = userInputService.InputChanged:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseMovement then
-            handleSliderInput(input)
+            local pos = math.clamp((input.Position.X - RadiusSlider.AbsolutePosition.X) / RadiusSlider.AbsoluteSize.X, 0, 1)
+            SliderButton.Position = UDim2.new(pos, 0, 0, 0)
+            local newRadius = 50 + (pos * 450)
+            updateAimbotRadius(newRadius)
+        end
+    end)
+    
+    userInputService.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            connection:Disconnect()
+        end
+    end)
+end)
+
+TimeSliderButton.MouseButton1Down:Connect(function()
+    local connection
+    connection = userInputService.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement then
+            local pos = math.clamp((input.Position.X - TimeSlider.AbsolutePosition.X) / TimeSlider.AbsoluteSize.X, 0, 1)
+            TimeSliderButton.Position = UDim2.new(pos, 0, 0, 0)
+            local newTime = 5 + (pos * 115)
+            updateDDoSTime(newTime)
         end
     end)
     
@@ -333,8 +429,7 @@ end)
 if isMobile then
     SliderButton.TouchTap:Connect(function()
     end)
-    
-    SliderButton.TouchLongPress:Connect(function()
+    TimeSliderButton.TouchTap:Connect(function()
     end)
 end
 
@@ -505,7 +600,6 @@ local function toggleAimbot(state)
             local head = target.Character.Head
             local targetPos = head.Position
             local currentPos = camera.CFrame.Position
-            local newPos = currentPos:Lerp(targetPos, aimbotSmoothness)
             camera.CFrame = CFrame.new(currentPos, targetPos)
             aimbotCircle.Color = Color3.fromRGB(0, 255, 0)
         else
@@ -521,8 +615,8 @@ local function showPlayerList(callback)
     listGui.Parent = game.CoreGui
     listGui.Name = "DevilList"
     
-    local listWidth = isMobile and 300 or 400
-    local listHeight = isMobile and 450 or 500
+    local listWidth = isMobile and 260 or 400
+    local listHeight = isMobile and 400 or 500
     
     local listFrame = Instance.new("Frame")
     listFrame.Parent = listGui
@@ -540,22 +634,22 @@ local function showPlayerList(callback)
     listTitle.Parent = listFrame
     listTitle.BackgroundColor3 = Color3.fromRGB(45, 0, 75)
     listTitle.BorderSizePixel = 0
-    listTitle.Size = UDim2.new(1, 0, 0, isMobile and 45 or 50)
+    listTitle.Size = UDim2.new(1, 0, 0, isMobile and 40 or 50)
     listTitle.Font = Enum.Font.GothamBold
     listTitle.Text = "Select Target"
     listTitle.TextColor3 = Color3.fromRGB(200, 150, 255)
-    listTitle.TextSize = isMobile and 20 or 22
+    listTitle.TextSize = isMobile and 18 or 22
     
     local listClose = Instance.new("TextButton")
     listClose.Parent = listFrame
     listClose.BackgroundColor3 = Color3.fromRGB(140, 0, 70)
     listClose.BorderSizePixel = 0
-    listClose.Position = UDim2.new(1, -(isMobile and 40 or 45), 0, isMobile and 8 or 10)
-    listClose.Size = UDim2.new(0, isMobile and 32 or 35, 0, isMobile and 32 or 35)
+    listClose.Position = UDim2.new(1, -(isMobile and 35 or 45), 0, isMobile and 5 or 10)
+    listClose.Size = UDim2.new(0, isMobile and 28 or 35, 0, isMobile and 28 or 35)
     listClose.Font = Enum.Font.GothamBold
     listClose.Text = "X"
     listClose.TextColor3 = Color3.fromRGB(255, 200, 255)
-    listClose.TextSize = isMobile and 18 or 20
+    listClose.TextSize = isMobile and 16 or 20
     
     local listCloseCorner = Instance.new("UICorner")
     listCloseCorner.CornerRadius = UDim.new(0, 8)
@@ -575,8 +669,8 @@ local function showPlayerList(callback)
     listScroll.Parent = listFrame
     listScroll.BackgroundColor3 = Color3.fromRGB(25, 0, 35)
     listScroll.BorderSizePixel = 0
-    listScroll.Position = UDim2.new(0, 10, 0, isMobile and 55 or 65)
-    listScroll.Size = UDim2.new(1, -20, 1, -(isMobile and 80 or 90))
+    listScroll.Position = UDim2.new(0, 8, 0, isMobile and 45 or 65)
+    listScroll.Size = UDim2.new(1, -16, 1, -(isMobile and 70 or 90))
     listScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
     listScroll.ScrollBarThickness = isMobile and 4 or 8
     listScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 0, 255)
@@ -584,7 +678,7 @@ local function showPlayerList(callback)
     local listLayout = Instance.new("UIListLayout")
     listLayout.Parent = listScroll
     listLayout.SortOrder = Enum.SortOrder.Name
-    listLayout.Padding = UDim.new(0, isMobile and 6 or 8)
+    listLayout.Padding = UDim.new(0, isMobile and 5 or 8)
     listLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
     
     for _, otherPlayer in pairs(game.Players:GetPlayers()) do
@@ -593,14 +687,14 @@ local function showPlayerList(callback)
             playerButton.Parent = listScroll
             playerButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
             playerButton.BorderSizePixel = 0
-            playerButton.Size = UDim2.new(1, -20, 0, isMobile and 50 or 45)
+            playerButton.Size = UDim2.new(1, -16, 0, isMobile and 40 or 45)
             playerButton.Font = Enum.Font.Gotham
             playerButton.Text = otherPlayer.Name
             playerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-            playerButton.TextSize = isMobile and 16 or 18
+            playerButton.TextSize = isMobile and 14 or 18
             
             local btnCorner = Instance.new("UICorner")
-            btnCorner.CornerRadius = UDim.new(0, 8)
+            btnCorner.CornerRadius = UDim.new(0, 6)
             btnCorner.Parent = playerButton
             
             playerButton.MouseButton1Click:Connect(function()
@@ -723,14 +817,14 @@ local function startDDoS()
     end
     
     ddosActive = true
+    ddosEndTime = tick() + ddosDuration
     DDoSButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-    updateStatus("DDoS started")
+    updateStatus("DDoS started for " .. ddosDuration .. " seconds")
     
     local remotes = findAllRemotes()
-    updateStatus(#remotes .. " remotes found, attacking...")
     
     local function attackRemote(remote)
-        while ddosActive and remote and remote.Parent do
+        while ddosActive and tick() < ddosEndTime and remote and remote.Parent do
             local success = pcall(function()
                 for i = 1, 50 do
                     if remote:IsA("RemoteEvent") then
@@ -755,7 +849,7 @@ local function startDDoS()
     end
     
     task.spawn(function()
-        while ddosActive do
+        while ddosActive and tick() < ddosEndTime do
             local newRemotes = findAllRemotes()
             for i, remote in ipairs(newRemotes) do
                 local alreadyRunning = false
@@ -769,6 +863,17 @@ local function startDDoS()
                 end
             end
             task.wait(1)
+        end
+        if ddosActive and tick() >= ddosEndTime then
+            ddosActive = false
+            for _, thread in pairs(ddosThreads) do
+                if thread then
+                    task.cancel(thread)
+                end
+            end
+            ddosThreads = {}
+            DDoSButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+            updateStatus("DDoS finished")
         end
     end)
 end
