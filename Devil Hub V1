@@ -35,6 +35,161 @@ local buttonHeight = isMobile and 40 or 55
 local fontSize = isMobile and 12 or 20
 local titleSize = isMobile and 16 or 24
 
+local KeyFrame = Instance.new("Frame")
+KeyFrame.Name = "KeyFrame"
+KeyFrame.Parent = ScreenGui
+KeyFrame.BackgroundColor3 = Color3.fromRGB(20, 0, 30)
+KeyFrame.BorderSizePixel = 0
+KeyFrame.Position = UDim2.new(0.5, -guiWidth/2, 0.5, -guiHeight/2)
+KeyFrame.Size = UDim2.new(0, guiWidth, 0, guiHeight)
+KeyFrame.Active = true
+KeyFrame.Draggable = not isMobile
+KeyFrame.ClipsDescendants = true
+
+local KeyCorner = Instance.new("UICorner")
+KeyCorner.CornerRadius = UDim.new(0, 10)
+KeyCorner.Parent = KeyFrame
+
+local KeyShadow = Instance.new("ImageLabel")
+KeyShadow.Name = "Shadow"
+KeyShadow.Parent = KeyFrame
+KeyShadow.BackgroundTransparency = 1
+KeyShadow.Position = UDim2.new(0, -6, 0, -6)
+KeyShadow.Size = UDim2.new(1, 12, 1, 12)
+KeyShadow.Image = "rbxassetid://1316045217"
+KeyShadow.ImageColor3 = Color3.fromRGB(60, 0, 80)
+KeyShadow.ImageTransparency = 0.4
+KeyShadow.ScaleType = Enum.ScaleType.Slice
+KeyShadow.SliceCenter = Rect.new(10, 10, 118, 118)
+
+local KeyTitle = Instance.new("TextLabel")
+KeyTitle.Parent = KeyFrame
+KeyTitle.BackgroundColor3 = Color3.fromRGB(45, 0, 75)
+KeyTitle.BorderSizePixel = 0
+KeyTitle.Size = UDim2.new(1, 0, 0, isMobile and 30 or 50)
+KeyTitle.Font = Enum.Font.GothamBold
+KeyTitle.Text = "DEVIL HUB V1 - KEY REQUIRED"
+KeyTitle.TextColor3 = Color3.fromRGB(200, 150, 255)
+KeyTitle.TextSize = titleSize
+KeyTitle.BackgroundTransparency = 0.2
+
+local KeyTitleGradient = Instance.new("UIGradient")
+KeyTitleGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(100, 0, 150)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(50, 0, 100))
+})
+KeyTitleGradient.Rotation = 90
+KeyTitleGradient.Parent = KeyTitle
+
+local KeyTitleCorner = Instance.new("UICorner")
+KeyTitleCorner.CornerRadius = UDim.new(0, 10)
+KeyTitleCorner.Parent = KeyTitle
+
+local KeyEntryLabel = Instance.new("TextLabel")
+KeyEntryLabel.Parent = KeyFrame
+KeyEntryLabel.BackgroundTransparency = 1
+KeyEntryLabel.Position = UDim2.new(0, 10, 0.5, -40)
+KeyEntryLabel.Size = UDim2.new(1, -20, 0, 20)
+KeyEntryLabel.Font = Enum.Font.GothamBold
+KeyEntryLabel.Text = "ENTER KEY"
+KeyEntryLabel.TextColor3 = Color3.fromRGB(200, 150, 255)
+KeyEntryLabel.TextSize = fontSize
+
+local KeyTextBox = Instance.new("TextBox")
+KeyTextBox.Parent = KeyFrame
+KeyTextBox.BackgroundColor3 = Color3.fromRGB(30, 0, 40)
+KeyTextBox.BorderSizePixel = 0
+KeyTextBox.Position = UDim2.new(0.1, 0, 0.5, -20)
+KeyTextBox.Size = UDim2.new(0.8, 0, 0, buttonHeight)
+KeyTextBox.Font = Enum.Font.Gotham
+KeyTextBox.Text = ""
+KeyTextBox.PlaceholderText = "Enter Key"
+KeyTextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+KeyTextBox.PlaceholderColor3 = Color3.fromRGB(150, 100, 200)
+KeyTextBox.TextSize = fontSize
+KeyTextBox.ClearTextOnFocus = false
+
+local KeyTextBoxCorner = Instance.new("UICorner")
+KeyTextBoxCorner.CornerRadius = UDim.new(0, 5)
+KeyTextBoxCorner.Parent = KeyTextBox
+
+local EnterButton = Instance.new("TextButton")
+EnterButton.Parent = KeyFrame
+EnterButton.BackgroundColor3 = Color3.fromRGB(140, 0, 70)
+EnterButton.BorderSizePixel = 0
+EnterButton.Position = UDim2.new(0.1, 0, 0.6, 20)
+EnterButton.Size = UDim2.new(0.8, 0, 0, buttonHeight)
+EnterButton.Font = Enum.Font.GothamBold
+EnterButton.Text = "ENTER"
+EnterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+EnterButton.TextSize = fontSize
+EnterButton.AutoButtonColor = false
+
+local EnterButtonCorner = Instance.new("UICorner")
+EnterButtonCorner.CornerRadius = UDim.new(0, 5)
+EnterButtonCorner.Parent = EnterButton
+
+local DiscordButton = Instance.new("TextButton")
+DiscordButton.Parent = KeyFrame
+DiscordButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
+DiscordButton.BorderSizePixel = 0
+DiscordButton.Position = UDim2.new(0.1, 0, 0.7, 20)
+DiscordButton.Size = UDim2.new(0.8, 0, 0, buttonHeight)
+DiscordButton.Font = Enum.Font.GothamBold
+DiscordButton.Text = "JOIN DISCORD"
+DiscordButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+DiscordButton.TextSize = fontSize
+DiscordButton.AutoButtonColor = false
+
+local DiscordButtonCorner = Instance.new("UICorner")
+DiscordButtonCorner.CornerRadius = UDim.new(0, 5)
+DiscordButtonCorner.Parent = DiscordButton
+
+DiscordButton.MouseButton1Click:Connect(function()
+    setclipboard("https://discord.gg/SNZaMv4Aw2")
+end)
+
+if isMobile then
+    DiscordButton.TouchTap:Connect(function()
+        setclipboard("https://discord.gg/SNZaMv4Aw2")
+    end)
+end
+
+local KeyErrorLabel = Instance.new("TextLabel")
+KeyErrorLabel.Parent = KeyFrame
+KeyErrorLabel.BackgroundTransparency = 1
+KeyErrorLabel.Position = UDim2.new(0, 10, 0.8, 10)
+KeyErrorLabel.Size = UDim2.new(1, -20, 0, 20)
+KeyErrorLabel.Font = Enum.Font.Gotham
+KeyErrorLabel.Text = ""
+KeyErrorLabel.TextColor3 = Color3.fromRGB(255, 100, 150)
+KeyErrorLabel.TextSize = isMobile and 8 or 14
+
+local function checkKey()
+    if KeyTextBox.Text == "47215" then
+        KeyFrame.Visible = false
+        MainFrame.Visible = true
+    else
+        KeyErrorLabel.Text = "Invalid Key"
+    end
+end
+
+KeyTextBox.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        checkKey()
+    end
+end)
+
+EnterButton.MouseButton1Click:Connect(function()
+    checkKey()
+end)
+
+if isMobile then
+    EnterButton.TouchTap:Connect(function()
+        checkKey()
+    end)
+end
+
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = ScreenGui
 MainFrame.BackgroundColor3 = Color3.fromRGB(20, 0, 30)
@@ -44,6 +199,7 @@ MainFrame.Size = UDim2.new(0, guiWidth, 0, guiHeight)
 MainFrame.Active = true
 MainFrame.Draggable = not isMobile
 MainFrame.ClipsDescendants = true
+MainFrame.Visible = false
 
 local Corner = Instance.new("UICorner")
 Corner.CornerRadius = UDim.new(0, 10)
@@ -290,7 +446,7 @@ FlingButton = createButton("FLING")
 WallhackButton = createButton("WALLHACK")
 AimbotButton = createButton("AIMBOT")
 AC6Button = createButton("AC6 SOUND")
-DDoSButton = createButton("DDoS ATTACK")
+DDoSButton = createButton("SERVER CRASHER")
 
 StatusLabel.Parent = MainFrame
 StatusLabel.BackgroundColor3 = Color3.fromRGB(30, 0, 45)
@@ -381,13 +537,6 @@ end
 local function updateDDoSTime(newTime)
     ddosDuration = math.floor(newTime)
     TimeValue.Text = tostring(ddosDuration)
-end
-
-local function handleSliderInput(input, slider, callback, min, max)
-    local pos = math.clamp((input.Position.X - slider.AbsolutePosition.X) / slider.AbsoluteSize.X, 0, 1)
-    SliderButton.Position = UDim2.new(pos, 0, 0, 0)
-    local newValue = min + (pos * (max - min))
-    callback(newValue)
 end
 
 SliderButton.MouseButton1Down:Connect(function()
@@ -722,7 +871,9 @@ local function findAllRemotes()
     allRemotes = {}
     for _, obj in pairs(game:GetDescendants()) do
         if obj:IsA("RemoteEvent") or obj:IsA("RemoteFunction") then
-            table.insert(allRemotes, obj)
+            if obj.Name ~= "UpdateCurrentCall" then
+                table.insert(allRemotes, obj)
+            end
         end
     end
     return allRemotes
@@ -761,12 +912,21 @@ local function killPlayer(targetPlayer)
         return
     end
     
-    local remotes = findAllRemotes()
-    updateStatus("Testing " .. #remotes .. " remotes...")
+    local damageEvents = {}
+    for _, obj in pairs(game:GetDescendants()) do
+        if obj:IsA("RemoteEvent") or obj:IsA("RemoteFunction") then
+            local nameLower = obj.Name:lower()
+            if nameLower:find("damage") or nameLower:find("hit") or nameLower:find("attack") or nameLower:find("bullet") or nameLower:find("melee") or nameLower:find("RemoteEvent") then
+                table.insert(damageEvents, obj)
+            end
+        end
+    end
+    
+    updateStatus("Found " .. #damageEvents .. " damage events...")
     
     local killed = false
     
-    for i, remote in ipairs(remotes) do
+    for i, remote in ipairs(damageEvents) do
         if remote and remote.Parent then
             local success = tryKillWithRemote(targetPlayer, remote)
             if success then
@@ -775,7 +935,7 @@ local function killPlayer(targetPlayer)
                 break
             end
         end
-        if i % 10 == 0 then
+        if i % 5 == 0 then
             task.wait(0.05)
         end
     end
@@ -812,14 +972,14 @@ local function startDDoS()
         end
         ddosThreads = {}
         DDoSButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-        updateStatus("DDoS stopped")
+        updateStatus("Server Crasher stopped")
         return
     end
     
     ddosActive = true
     ddosEndTime = tick() + ddosDuration
     DDoSButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-    updateStatus("DDoS started for " .. ddosDuration .. " seconds")
+    updateStatus("Server Crasher started for " .. ddosDuration .. " seconds")
     
     local remotes = findAllRemotes()
     
